@@ -14,8 +14,8 @@ import (
 
 	"go.uber.org/atomic"
 
-	"github.com/golang-migrate/migrate/v4"
-	"github.com/golang-migrate/migrate/v4/database"
+	"github.com/Topsort/migrate/v4"
+	"github.com/Topsort/migrate/v4/database"
 	"github.com/hashicorp/go-multierror"
 	"github.com/lib/pq"
 )
@@ -74,7 +74,6 @@ func WithInstance(instance *sql.DB, config *Config) (database.Driver, error) {
 	}
 
 	conn, err := instance.Conn(context.Background())
-
 	if err != nil {
 		return nil, err
 	}

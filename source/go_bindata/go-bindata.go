@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/golang-migrate/migrate/v4/source"
+	"github.com/Topsort/migrate/v4/source"
 )
 
 type AssetFunc func(name string) ([]byte, error)
@@ -37,9 +37,7 @@ func (b *Bindata) Open(url string) (source.Driver, error) {
 	return nil, fmt.Errorf("not yet implemented")
 }
 
-var (
-	ErrNoAssetSource = fmt.Errorf("expects *AssetSource")
-)
+var ErrNoAssetSource = fmt.Errorf("expects *AssetSource")
 
 func WithInstance(instance interface{}) (source.Driver, error) {
 	if _, ok := instance.(*AssetSource); !ok {

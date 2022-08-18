@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/Topsort/migrate/v4/database"
 	"github.com/cenkalti/backoff/v4"
-	"github.com/golang-migrate/migrate/v4/database"
 	"github.com/hashicorp/go-multierror"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -27,13 +27,15 @@ func init() {
 
 var DefaultMigrationsCollection = "schema_migrations"
 
-const DefaultLockingCollection = "migrate_advisory_lock" // the collection to use for advisory locking by default.
-const lockKeyUniqueValue = 0                             // the unique value to lock on. If multiple clients try to insert the same key, it will fail (locked).
-const DefaultLockTimeout = 15                            // the default maximum time to wait for a lock to be released.
-const DefaultLockTimeoutInterval = 10                    // the default maximum intervals time for the locking timout.
-const DefaultAdvisoryLockingFlag = true                  // the default value for the advisory locking feature flag. Default is true.
-const LockIndexName = "lock_unique_key"                  // the name of the index which adds unique constraint to the locking_key field.
-const contextWaitTimeout = 5 * time.Second               // how long to wait for the request to mongo to block/wait for.
+const (
+	DefaultLockingCollection   = "migrate_advisory_lock" // the collection to use for advisory locking by default.
+	lockKeyUniqueValue         = 0                       // the unique value to lock on. If multiple clients try to insert the same key, it will fail (locked).
+	DefaultLockTimeout         = 15                      // the default maximum time to wait for a lock to be released.
+	DefaultLockTimeoutInterval = 10                      // the default maximum intervals time for the locking timout.
+	DefaultAdvisoryLockingFlag = true                    // the default value for the advisory locking feature flag. Default is true.
+	LockIndexName              = "lock_unique_key"       // the name of the index which adds unique constraint to the locking_key field.
+	contextWaitTimeout         = 5 * time.Second         // how long to wait for the request to mongo to block/wait for.
+)
 
 var (
 	ErrNoDatabaseName            = fmt.Errorf("no database name")
@@ -153,7 +155,6 @@ func (m *Mongo) Open(dsn string) (database.Driver, error) {
 	}
 
 	maxLockCheckInterval, err := parseInt(lockTimeout, DefaultLockTimeoutInterval)
-
 	if err != nil {
 		return nil, err
 	}
@@ -185,7 +186,6 @@ func (m *Mongo) Open(dsn string) (database.Driver, error) {
 // Parse the url param, convert it to boolean
 // returns error if param invalid. returns defaultValue if param not present
 func parseBoolean(urlParam string, defaultValue bool) (bool, error) {
-
 	// if parameter passed, parse it (otherwise return default value)
 	if urlParam != "" {
 		result, err := strconv.ParseBool(urlParam)
@@ -202,7 +202,6 @@ func parseBoolean(urlParam string, defaultValue bool) (bool, error) {
 // Parse the url param, convert it to int
 // returns error if param invalid. returns defaultValue if param not present
 func parseInt(urlParam string, defaultValue int) (int, error) {
-
 	// if parameter passed, parse it (otherwise return default value)
 	if urlParam != "" {
 		result, err := strconv.Atoi(urlParam)
@@ -215,6 +214,7 @@ func parseInt(urlParam string, defaultValue int) (int, error) {
 	// if no url Param passed, return default value
 	return defaultValue, nil
 }
+
 func (m *Mongo) SetVersion(version int, dirty bool) error {
 	migrationsCollection := m.db.Collection(m.config.MigrationsCollection)
 	if err := migrationsCollection.Drop(context.TODO()); err != nil {

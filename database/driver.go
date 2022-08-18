@@ -9,7 +9,7 @@ import (
 	"io"
 	"sync"
 
-	iurl "github.com/golang-migrate/migrate/v4/internal/url"
+	iurl "github.com/Topsort/migrate/v4/internal/url"
 )
 
 var (
@@ -19,8 +19,10 @@ var (
 
 const NilVersion int = -1
 
-var driversMu sync.RWMutex
-var drivers = make(map[string]Driver)
+var (
+	driversMu sync.RWMutex
+	drivers   = make(map[string]Driver)
+)
 
 // Driver is the interface every database driver must implement.
 //

@@ -9,9 +9,9 @@ import (
 	"regexp"
 	"strconv"
 
+	"github.com/Topsort/migrate/v4"
+	"github.com/Topsort/migrate/v4/database"
 	"github.com/cockroachdb/cockroach-go/v2/crdb"
-	"github.com/golang-migrate/migrate/v4"
-	"github.com/golang-migrate/migrate/v4/database"
 	"github.com/hashicorp/go-multierror"
 	"github.com/lib/pq"
 	"go.uber.org/atomic"
@@ -24,8 +24,10 @@ func init() {
 	database.Register("crdb-postgres", &db)
 }
 
-var DefaultMigrationsTable = "schema_migrations"
-var DefaultLockTable = "schema_lock"
+var (
+	DefaultMigrationsTable = "schema_migrations"
+	DefaultLockTable       = "schema_lock"
+)
 
 var (
 	ErrNilConfig      = fmt.Errorf("no config")

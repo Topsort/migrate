@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/golang-migrate/migrate/v4/database"
+	"github.com/Topsort/migrate/v4/database"
 	"github.com/hashicorp/go-multierror"
 	sf "github.com/snowflakedb/gosnowflake"
 	"go.uber.org/atomic"
@@ -75,7 +75,6 @@ func WithInstance(instance *sql.DB, config *Config) (database.Driver, error) {
 	}
 
 	conn, err := instance.Conn(context.Background())
-
 	if err != nil {
 		return nil, err
 	}

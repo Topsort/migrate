@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/golang-migrate/migrate/v4/source"
+	"github.com/Topsort/migrate/v4/source"
 	"github.com/ktrysmt/go-bitbucket"
 )
 
@@ -101,7 +101,6 @@ func (b *Bitbucket) readDirectory() error {
 	}
 
 	dirContents, err := b.client.Repositories.Repository.ListFiles(fOpt)
-
 	if err != nil {
 		return err
 	}
@@ -193,7 +192,6 @@ func (b *Bitbucket) ReadDown(version uint) (r io.ReadCloser, identifier string, 
 			Path:     path.Join(b.config.Path, m.Raw),
 		}
 		file, err := b.client.Repositories.Repository.GetFileBlob(fBlobOpt)
-
 		if err != nil {
 			return nil, "", err
 		}

@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/golang-migrate/migrate/v4/source"
+	"github.com/Topsort/migrate/v4/source"
 	"github.com/xanzy/go-gitlab"
 )
 
@@ -39,8 +39,7 @@ type Gitlab struct {
 	migrations  *source.Migrations
 }
 
-type Config struct {
-}
+type Config struct{}
 
 func (g *Gitlab) Open(url string) (source.Driver, error) {
 	u, err := nurl.Parse(url)

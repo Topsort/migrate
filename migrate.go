@@ -13,9 +13,9 @@ import (
 
 	"github.com/hashicorp/go-multierror"
 
-	"github.com/golang-migrate/migrate/v4/database"
-	iurl "github.com/golang-migrate/migrate/v4/internal/url"
-	"github.com/golang-migrate/migrate/v4/source"
+	"github.com/Topsort/migrate/v4/database"
+	iurl "github.com/Topsort/migrate/v4/internal/url"
+	"github.com/Topsort/migrate/v4/source"
 )
 
 // DefaultPrefetchMigrations sets the number of migrations to pre-read
@@ -845,7 +845,6 @@ func (m *Migrate) newMigration(version uint, targetVersion int) (*Migration, err
 
 		} else if err != nil {
 			return nil, err
-
 		} else {
 			// create migration from up source
 			migr, err = NewMigration(r, identifier, version, targetVersion)
@@ -865,7 +864,6 @@ func (m *Migrate) newMigration(version uint, targetVersion int) (*Migration, err
 
 		} else if err != nil {
 			return nil, err
-
 		} else {
 			// create migration from down source
 			migr, err = NewMigration(r, identifier, version, targetVersion)

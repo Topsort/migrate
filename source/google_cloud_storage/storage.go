@@ -1,6 +1,7 @@
 package googlecloudstorage
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"net/url"
@@ -9,8 +10,8 @@ import (
 	"strings"
 
 	"cloud.google.com/go/storage"
-	"context"
-	"github.com/golang-migrate/migrate/v4/source"
+
+	"github.com/Topsort/migrate/v4/source"
 	"google.golang.org/api/iterator"
 )
 

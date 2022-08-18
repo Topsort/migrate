@@ -12,7 +12,7 @@ import (
 
 	"golang.org/x/oauth2"
 
-	"github.com/golang-migrate/migrate/v4/source"
+	"github.com/Topsort/migrate/v4/source"
 	"github.com/google/go-github/v39/github"
 )
 
@@ -113,7 +113,6 @@ func (g *Github) readDirectory() error {
 		g.config.Path,
 		g.options,
 	)
-
 	if err != nil {
 		return err
 	}
@@ -185,7 +184,6 @@ func (g *Github) ReadUp(version uint) (r io.ReadCloser, identifier string, err e
 			path.Join(g.config.Path, m.Raw),
 			g.options,
 		)
-
 		if err != nil {
 			return nil, "", err
 		}
@@ -211,7 +209,6 @@ func (g *Github) ReadDown(version uint) (r io.ReadCloser, identifier string, err
 			path.Join(g.config.Path, m.Raw),
 			g.options,
 		)
-
 		if err != nil {
 			return nil, "", err
 		}

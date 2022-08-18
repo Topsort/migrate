@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"sync/atomic"
 
-	"github.com/golang-migrate/migrate/v4/database"
-	"github.com/golang-migrate/migrate/v4/database/multistmt"
+	"github.com/Topsort/migrate/v4/database"
+	"github.com/Topsort/migrate/v4/database/multistmt"
 	"github.com/hashicorp/go-multierror"
 	"github.com/neo4j/neo4j-go-driver/neo4j"
 )
@@ -26,9 +26,7 @@ var (
 	DefaultMultiStatementMaxSize = 10 * 1 << 20 // 10 MB
 )
 
-var (
-	ErrNilConfig = fmt.Errorf("no config")
-)
+var ErrNilConfig = fmt.Errorf("no config")
 
 type Config struct {
 	MigrationsLabel       string

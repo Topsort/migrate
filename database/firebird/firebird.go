@@ -10,8 +10,8 @@ import (
 	"io"
 	nurl "net/url"
 
-	"github.com/golang-migrate/migrate/v4"
-	"github.com/golang-migrate/migrate/v4/database"
+	"github.com/Topsort/migrate/v4"
+	"github.com/Topsort/migrate/v4/database"
 	"github.com/hashicorp/go-multierror"
 	_ "github.com/nakagami/firebirdsql"
 	"go.uber.org/atomic"
@@ -25,9 +25,7 @@ func init() {
 
 var DefaultMigrationsTable = "schema_migrations"
 
-var (
-	ErrNilConfig = fmt.Errorf("no config")
-)
+var ErrNilConfig = fmt.Errorf("no config")
 
 type Config struct {
 	DatabaseName    string
@@ -90,7 +88,6 @@ func (f *Firebird) Open(dsn string) (database.Driver, error) {
 		MigrationsTable: purl.Query().Get("x-migrations-table"),
 		DatabaseName:    purl.Path,
 	})
-
 	if err != nil {
 		return nil, err
 	}

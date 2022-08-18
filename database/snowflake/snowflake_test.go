@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	"github.com/DATA-DOG/go-sqlmock"
-	"github.com/golang-migrate/migrate/v4/database"
+	"github.com/Topsort/migrate/v4/database"
 	sf "github.com/snowflakedb/gosnowflake"
 )
 
